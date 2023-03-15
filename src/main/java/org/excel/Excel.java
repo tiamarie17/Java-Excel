@@ -3,8 +3,7 @@ package org.excel;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.junit.Before;
-import org.junit.Test;
+
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import static org.excel.Utils.ConvertTxtFile;
 
 public class Excel {
 
@@ -65,12 +65,13 @@ public class Excel {
         return data;
     }
 
+
     //Create a separate sheet
     //headers are name and age by default, title of sheet is persons
-    public Map<Integer, List<String>> CreateSheet() {
-        Workbook workbook = new XSSFWorkbook();
+    public XSSFWorkbook CreateWorkbook() {
+        XSSFWorkbook workbook = new XSSFWorkbook();
 
-        Sheet sheet = workbook.createSheet("Count");
+        Sheet sheet = workbook.createSheet("Text Analytics");
         sheet.setColumnWidth(0, 6000);
         sheet.setColumnWidth(1, 4000);
 
@@ -105,7 +106,7 @@ public class Excel {
         cell.setCellStyle(style);
 
         cell = row.createCell(1);
-        cell.setCellValue(20);
+        cell.setCellValue(14);
         cell.setCellStyle(style);
 
         //Write the content to current directory and close the workbook
@@ -129,22 +130,33 @@ public class Excel {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
+        return workbook;
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         //Open Excel document and grab first sheet
-        String fileLocation = new File("").getAbsolutePath() + "\\src\\main\\java\\TestDoc.xlsx";
+        String fileLocation = new File("").getAbsolutePath() + "\\TestDoc.xlsx";
         Excel xcel = new Excel();
         XSSFWorkbook wb = xcel.getWorkbook(fileLocation);
         System.out.println("Workbook found");
         //print first sheet
         Map<Integer, List<String>> sheet = xcel.getWorkbookSheet(wb);
         System.out.println("sheet is " + sheet);
+        //convert txt file to String array
+        ConvertTxtFile();
+
+        //create new workbook
+        XSSFWorkbook newWB = xcel.CreateWorkbook();
+        System.out.println("New workbook created");
+        //print new workbook at first sheet
+        Map<Integer, List<String>> newSheet = xcel.getWorkbookSheet(newWB);
+        System.out.println("newSheet is " + newSheet);
 
     }
 }
+
+
 
         //TEST
 //        public class ExcelIntegrationTest {
