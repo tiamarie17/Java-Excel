@@ -8,9 +8,8 @@ import java.util.List;
 
 public class Utils {
     //Convert txt file to array of strings
-    public static String[] ConvertTxtFile() throws IOException {
+    public static String[] ConvertTxtFile(Path path) throws IOException {
         //TODO: Make this method accept any path
-        Path path = Paths.get("words.txt");
         List<String> lines = Files.readAllLines(path);
         String[] arr = lines.toArray(new String[lines.size()]);
         System.out.println("arr is " + arr);

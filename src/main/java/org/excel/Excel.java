@@ -9,10 +9,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.lang.reflect.Array;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.*;
+
 import static org.excel.Utils.ConvertTxtFile;
 
 public class Excel {
@@ -65,6 +66,42 @@ public class Excel {
         return data;
     }
 
+    //Text analytics
+    public Map<String, Integer> CountWordFrequency(String[] arr, Map<Integer, List<String>> data){
+        //convert string array to hashmap with count for each word starting at 0
+        Map<String, Integer> hashMap = new HashMap<String, Integer>();
+
+        for(int i = 0; i < arr.length; i++){
+            hashMap.put(arr[i], 0);
+        }
+
+        System.out.println("String to hashmap: " + hashMap);
+        System.out.println("---------------------");
+        System.out.println("data is " + data);
+
+        //loop through each row
+        for(Integer row: data.keySet()){
+            //loop through each column
+            System.out.println("row is " + row);
+            System.out.println("data.keySet() is " + data.keySet());
+            for(List column: data.values()){
+                System.out.println("column is " + column);
+                //loop through each text fragment
+                for (Object text: column){
+                    //convert object to string array
+                    String[] wordArray = text.toString().split(" ");
+                    System.out.println("wordArray is " + Arrays.toString(wordArray));
+                    //loop through each word
+                    for (String word: wordArray){
+                        System.out.println("print each word");
+                    }
+                }
+
+
+            }
+        }
+        return new HashMap();
+    }
 
     //Create a separate sheet
     //headers are name and age by default, title of sheet is persons
@@ -135,6 +172,7 @@ public class Excel {
 
 
     public static void main(String[] args) throws IOException {
+        Path path = Paths.get("words.txt");
         //Open Excel document and grab first sheet
         String fileLocation = new File("").getAbsolutePath() + "\\TestDoc.xlsx";
         Excel xcel = new Excel();
@@ -144,8 +182,8 @@ public class Excel {
         Map<Integer, List<String>> sheet = xcel.getWorkbookSheet(wb);
         System.out.println("sheet is " + sheet);
         //convert txt file to String array
-        ConvertTxtFile();
-
+        String[] arr = ConvertTxtFile(path);
+        xcel.CountWordFrequency(arr, sheet);
         //create new workbook
         XSSFWorkbook newWB = xcel.CreateWorkbook();
         System.out.println("New workbook created");
@@ -180,11 +218,11 @@ public class Excel {
 //                Map<Integer, List<String>> data
 //                        = excelPOIHelper.readExcel(fileLocation);
 //
-//                assertEquals("Name", data.get(0).get(0));
-//                assertEquals("Age", data.get(0).get(1));
+//                assertEquals("Word", data.get(0).get(0));
+//                assertEquals("Count", data.get(0).get(1));
 //
-//                assertEquals("John Smith", data.get(1).get(0));
-//                assertEquals("20", data.get(1).get(1));
+//                assertEquals("climate", data.get(1).get(0));
+//                assertEquals("14", data.get(1).get(1));
 //            }
 //        }
 
