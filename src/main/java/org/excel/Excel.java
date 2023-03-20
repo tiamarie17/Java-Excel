@@ -74,26 +74,16 @@ public class Excel {
             hashMap.put(arr[i], 0);
         }
 
-        System.out.println("String to hashmap: " + hashMap);
-        System.out.println("hashmap values are: " + hashMap.values());
-        System.out.println("---------------------");
-        System.out.println("data is " + data);
-
         //loop through each row
         for(Integer row: data.keySet()){
             //loop through each column
-            System.out.println("row is " + row);
-            System.out.println("data.keySet() is " + data.keySet());
             for(List column: data.values()){
-                System.out.println("column is " + column);
                 //loop through each text fragment
                 for (Object text: column){
                     //convert objects to string arrays
                     String[] wordArray = text.toString().split(" ");
-                    System.out.println("wordArray is " + Arrays.toString(wordArray));
                     //loop through each word in string arrays from data
                     for (String word: wordArray){
-                        System.out.println("word is " + word);
                         //loop through each word searched from .txt file
                        for(String wordSearched: hashMap.keySet()){
                            System.out.println("wordSearched is " + wordSearched);
