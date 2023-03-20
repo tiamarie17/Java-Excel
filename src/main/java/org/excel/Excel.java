@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
@@ -76,6 +75,7 @@ public class Excel {
         }
 
         System.out.println("String to hashmap: " + hashMap);
+        System.out.println("hashmap values are: " + hashMap.values());
         System.out.println("---------------------");
         System.out.println("data is " + data);
 
@@ -88,16 +88,25 @@ public class Excel {
                 System.out.println("column is " + column);
                 //loop through each text fragment
                 for (Object text: column){
-                    //convert object to string array
+                    //convert objects to string arrays
                     String[] wordArray = text.toString().split(" ");
                     System.out.println("wordArray is " + Arrays.toString(wordArray));
-                    //loop through each word
+                    //loop through each word in string arrays from data
                     for (String word: wordArray){
-                        System.out.println("print each word");
+                        System.out.println("word is " + word);
+                        //loop through each word searched from .txt file
+                       for(String wordSearched: hashMap.keySet()){
+                           System.out.println("wordSearched is " + wordSearched);
+                           if (wordSearched.equals(word)){
+                               System.out.println("Found  match!");
+                               //increment count by one for the matched word
+                               hashMap.put(wordSearched, hashMap.get(wordSearched) + 1);
+                           }else{
+                               System.out.println("No match found!");
+                           }
+                       }
                     }
                 }
-
-
             }
         }
         return new HashMap();
@@ -183,6 +192,7 @@ public class Excel {
         System.out.println("sheet is " + sheet);
         //convert txt file to String array
         String[] arr = ConvertTxtFile(path);
+        //do text analytics
         xcel.CountWordFrequency(arr, sheet);
         //create new workbook
         XSSFWorkbook newWB = xcel.CreateWorkbook();
