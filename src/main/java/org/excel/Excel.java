@@ -32,10 +32,13 @@ public class Excel {
     //Read Excel document
     public Map<Integer, List<String>> getWorkbookSheet(XSSFWorkbook workbook) {
 
-        Sheet sheet = workbook.getSheetAt(0);
-
+//        Sheet sheet = workbook.getSheetAt(0);
         Map<Integer, List<String>> data = new HashMap<>();
         int i = 0;
+
+        Iterator<Sheet> sheetIterator = workbook.iterator();
+        while (sheetIterator.hasNext()) {
+            Sheet sheet = sheetIterator.next();
         for (Row row : sheet) {
             data.put(i, new ArrayList<String>());
             for (Cell cell : row) {
@@ -62,6 +65,7 @@ public class Excel {
             }
             i++;
         }
+        }
         return data;
     }
 
@@ -69,42 +73,30 @@ public class Excel {
     public Map<String, Integer> CountWordFrequency(String[] arr, Map<Integer, List<String>> data){
         //convert string array to hashmap with count for each word starting at 0
         Map<String, Integer> hashMap = new HashMap<String, Integer>();
-
-        for(int i = 0; i < arr.length; i++){
+        for(int i = 0; i < arr.length; i++) {
             hashMap.put(arr[i], 0);
         }
-
-        //loop through each row
-        for(Integer row: data.keySet()){
             //loop through each column
-            for(List column: data.values()){
-                //loop through each text fragment
-                for (Object text: column){
-                    //convert objects to string arrays
-                    String[] wordArray = text.toString().split(" ");
-                    //loop through each word in string arrays from data
-                    for (String word: wordArray){
-                        //loop through each word searched from .txt file
-                       for(String wordSearched: hashMap.keySet()){
-                           System.out.println("wordSearched is " + wordSearched);
-                           if (wordSearched.equals(word)){
-                               System.out.println("Found  match!");
-                               //increment count by one for the matched word
-                               hashMap.put(wordSearched, hashMap.get(wordSearched) + 1);
-                           }else{
-                               System.out.println("No match found!");
-                           }
-                       }
+                for (List column : data.values()) {
+                   // loop through each text fragment object
+                    for (Object text : column) {
+                        //convert objects to string array
+                        String[] wordArray = text.toString().toLowerCase().split(" ");
+                        for (String word : wordArray){
+                            //increment count by 1 in hashmap for each match found
+                            if(hashMap.containsKey(word)){
+                                hashMap.put(word, hashMap.get(word) + 1);
+                            }
+                        }
                     }
                 }
-            }
-        }
-        return new HashMap();
+            return hashMap;
     }
+
 
     //Create a separate sheet
     //headers are name and age by default, title of sheet is persons
-    public XSSFWorkbook CreateWorkbook() {
+    public XSSFWorkbook CreateWorkbook(Map<String, Integer> hashMap) {
         XSSFWorkbook workbook = new XSSFWorkbook();
 
         Sheet sheet = workbook.createSheet("Text Analytics");
@@ -183,9 +175,9 @@ public class Excel {
         //convert txt file to String array
         String[] arr = ConvertTxtFile(path);
         //do text analytics
-        xcel.CountWordFrequency(arr, sheet);
+        Map<String, Integer> hashMap = xcel.CountWordFrequency(arr, sheet);
         //create new workbook
-        XSSFWorkbook newWB = xcel.CreateWorkbook();
+        XSSFWorkbook newWB = xcel.CreateWorkbook(hashMap);
         System.out.println("New workbook created");
         //print new workbook at first sheet
         Map<Integer, List<String>> newSheet = xcel.getWorkbookSheet(newWB);
