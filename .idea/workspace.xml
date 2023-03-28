@@ -9,7 +9,6 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/org/excel/Excel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/excel/Excel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/excel/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/excel/Utils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/temp.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/temp.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/words.txt" beforeDir="false" afterPath="$PROJECT_DIR$/words.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,17 +41,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/thei1tia/Desktop/Projects/Excel&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "C:/Users/thei1tia/Desktop/Projects/Excel",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="org.excel" />
@@ -94,15 +93,6 @@
     <servers />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/excel/Excel.java</url>
-          <line>92</line>
-          <option name="timeStamp" value="19" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="java.util.HashMap$Node" memberName="value" />

@@ -33,6 +33,7 @@ public class Excel {
     public Map<Integer, List<String>> getWorkbookSheet(XSSFWorkbook workbook) {
 
 //        Sheet sheet = workbook.getSheetAt(0);
+        //Get all sheets
         Map<Integer, List<String>> data = new HashMap<>();
         int i = 0;
 
@@ -90,12 +91,14 @@ public class Excel {
                         }
                     }
                 }
+
             return hashMap;
+
+
     }
 
 
-    //Create a separate sheet
-    //headers are name and age by default, title of sheet is persons
+    //Create a separate sheet with text analytics data
     public XSSFWorkbook CreateWorkbook(Map<String, Integer> hashMap) {
         XSSFWorkbook workbook = new XSSFWorkbook();
 
@@ -106,11 +109,11 @@ public class Excel {
         Row header = sheet.createRow(0);
 
         CellStyle headerStyle = workbook.createCellStyle();
-        headerStyle.setFillForegroundColor(IndexedColors.LIGHT_BLUE.getIndex());
+        headerStyle.setFillForegroundColor(IndexedColors.LIGHT_GREEN.getIndex());
         headerStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
 
         XSSFFont font = ((XSSFWorkbook) workbook).createFont();
-        font.setFontName("Arial");
+        font.setFontName("Lato");
         font.setFontHeightInPoints((short) 16);
         font.setBold(true);
         headerStyle.setFont(font);
@@ -127,15 +130,23 @@ public class Excel {
         CellStyle style = workbook.createCellStyle();
         style.setWrapText(true);
 
-        //set cell values
-        Row row = sheet.createRow(2);
-        Cell cell = row.createCell(0);
-        cell.setCellValue("climate");
-        cell.setCellStyle(style);
+        //Set cell values
+        int i = 2;
+        int j = 0;
+        for (Map.Entry<String, Integer> entry: hashMap.entrySet()) {
 
-        cell = row.createCell(1);
-        cell.setCellValue(14);
-        cell.setCellStyle(style);
+            Row row = sheet.createRow(i);
+            Cell cell = row.createCell(j);
+            cell.setCellValue(entry.getKey());
+            cell.setCellStyle(style);
+
+            cell = row.createCell(j + 1);
+            cell.setCellValue(entry.getValue());
+            cell.setCellStyle(style);
+
+            i++;
+
+            }
 
         //Write the content to current directory and close the workbook
         File currDir = new File(".");
@@ -169,7 +180,7 @@ public class Excel {
         Excel xcel = new Excel();
         XSSFWorkbook wb = xcel.getWorkbook(fileLocation);
         System.out.println("Workbook found");
-        //print first sheet
+        //print workbook sheets
         Map<Integer, List<String>> sheet = xcel.getWorkbookSheet(wb);
         System.out.println("sheet is " + sheet);
         //convert txt file to String array
@@ -179,7 +190,7 @@ public class Excel {
         //create new workbook
         XSSFWorkbook newWB = xcel.CreateWorkbook(hashMap);
         System.out.println("New workbook created");
-        //print new workbook at first sheet
+        //print new workbook
         Map<Integer, List<String>> newSheet = xcel.getWorkbookSheet(newWB);
         System.out.println("newSheet is " + newSheet);
 
@@ -188,7 +199,7 @@ public class Excel {
 
 
 
-        //TEST
+//TEST
 //        public class ExcelIntegrationTest {
 //
 //            private ExcelPOIHelper excelPOIHelper;
