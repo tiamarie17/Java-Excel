@@ -8,9 +8,8 @@ an Excel file. I modified the method so that it would read all the sheets in a f
 that will be searched for in the document. I created a static method in the Utils folder that converts the .txt file into an array of Strings that can be passed into another method.
 
 Once I had all the data, I created a method called CountWordFrequency to do the text analytics on the documents. It takes in two parameters--the array of Strings (the words we are searching for), and the data from
-the Excel spreadsheets as a Map<Integer, List<String>>. I started by converting the array of strings passed in to a hashmap and set all of the values of each word in the hashmap to 0. In this way, I used a hashmap
-to keep track of the count of each word found in the Excel document. Regarding the data from the Excel spreadsheet, I only needed to access the values within the Map. Since the values are a List<String> type, I was able
-to use for loops to loop through those. Within the for loops, I checked to see if the words listed in the .txt file existed in the Excel document. If I found a match, I wrote an if statement that added 1 to the count value in the hashmap.
+the Excel spreadsheets as a Map<Integer, List<String>>. I started by converting the array of strings into a hashmap and set all of the values to zero. In this way, I used a hashmap to keep track of the count of each word (key) found in the Excel document. Regarding the data from the Excel spreadsheet, I only needed to access the values within the Map. Since the values are a List<String> type, I was able
+to loop through those. I ended up needing to convert an array of objects into a string array. Within the for loops, I checked to see if the words listed in the .txt file existed in the Excel document. If I found a match, I wrote an if statement that added 1 to the count value in the hashmap for that particular word. 
 
 Finally, I added a CreateWorkBook Method that creates a new Excel workbook and sheet with the data returned from the CountWordFrequencyMethod. This method styles the cells and labels the columns.
 To set the cell values and get the appropriate number of rows, I looped through the hashmap using the Map.entrySet() method and set the cell values to each key/value pair in the set.
