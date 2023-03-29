@@ -21,6 +21,6 @@ The method also sets the file location, name and type, and closes the workbook o
 Java, Maven
 
 ### Next steps
-This project really helped me gain a deeper understandings of Collections in Java, specifically the Maps, Lists, and Sets. My next steps for this project are to practice
+This project really helped me gain a deeper understanding of Collections in Java, specifically the Maps, Lists, and Sets. My next steps for this project are to practice
 replacing some of the for loops with Java Streams which I have also been learning about. I also plan to create another version of this project that runs with Spring Boot and includes
 REST service so that I can test out the routes in Postman. Finally, I plan to go back and refactor this code as well.
