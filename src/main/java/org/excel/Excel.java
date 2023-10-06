@@ -17,7 +17,7 @@ import static org.excel.Utils.ConvertTxtFile;
 
 public class Excel {
 
-    //Open workbook doc
+    //Open workbook doc in excel
     public XSSFWorkbook getWorkbook(String path) {
         XSSFWorkbook workbook;
 
